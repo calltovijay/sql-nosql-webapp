@@ -1,7 +1,11 @@
 Flask==1.0.2
+HTMLParser==0.0.2
+itsdangerous==1.1.0
 Jinja2==2.10
 json5==0.8.5
 jsonschema==3.0.1
+MarkupSafe==1.1.1
+numpy==1.16.4
 pandas==0.25.1
 PyMySQL==0.9.3
 PyYAML==5.1
