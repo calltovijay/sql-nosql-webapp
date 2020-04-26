@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        .form-row textarea {
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+            outline: 0;
+            box-shadow: none;
+            border: none;
+            border-bottom: 1px solid #ced4da;
+            border-radius: 0;
+            box-sizing: content-box;
+            background-color: transparent;
+            overflow-y: hidden;
+            padding: 1.5rem 0;
+            resize: none;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+    </style>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+    <script type=text/javascript>
+        $(function () {
+            $('a#process_input').bind('click', function () {
+                $.post('/results', {
+                    input_sql_query: $('textarea[name="input_sql_query"]').val(),
+                }, function (data) {
+                    $('#result').html(data);
+                });
+                return false;
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+<div id="query_entry" align='center'>
+    <form>
+        <textarea id="text_input" rows="10" cols="120" name=input_sql_query style="font-size: 14pt">Type SQL query here...
+        </textarea>
+        <br><br><br>
+        <a href=# id=process_input>
+            <button style="font-size: 14pt">Execute SQL Query</button>
+        </a>
+    </form>
+    <br>
+</div>
+<div id="results_section" style=overflow:auto;">
+    <h2 align='center'>SQL Query Results</h2>
+    <p align='center' id=result>
+        {% for table in tables %}
+        {{ table|safe }}
+        {% endfor %}
+    </p>
+
+</div>
+</body>
+</html>
