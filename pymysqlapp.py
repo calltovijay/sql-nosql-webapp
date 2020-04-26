@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from db_model import Database
+from db_model import DBConnection
 import pandas as pd
 
 app = Flask(__name__)
@@ -22,7 +22,7 @@ def query_results():
 
 
 def run_sql_query(sql):
-    db = Database()
+    db = DBConnection()
     results = db.get_query_results(sql)
     return results
 
