@@ -21,5 +21,10 @@ class DBConnection:
                                    DictCursor)
 
     def get_query_results(self, sql):
-        df = pd.read_sql_query(sql, self.con)
-        return df
+        status_message = "Success"
+        df = None
+        try:
+            df = pd.read_sql_query(sql, self.con)
+        except:
+            status_message ="Error: Invalid SQL Query. Please validate"
+        return df, status_message

@@ -17,14 +17,17 @@ def query_results():
     else:
         sql = request.args.get('input_sql_query')
 
-    res = run_sql_query(sql)
-    return render_template('query_results.html', tables=[res.to_html(classes='data', header="true")])
+    res, msg = run_sql_query(sql)
+    if res is not None:
+        return render_template('query_results.html', tables=[res.to_html(classes='data', header="true")])
+    else:
+        return render_template('error.html', status_message=msg)
 
 
 def run_sql_query(sql):
     db = DBConnection()
-    results = db.get_query_results(sql)
-    return results
+    results, status_msg = db.get_query_results(sql)
+    return results, status_msg
 
 
 if __name__ == "__main__":

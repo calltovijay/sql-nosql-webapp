@@ -47,6 +47,18 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
     <script type=text/javascript>
+        $(".formInput").each(function () {
+            var inputVal = $(this).val();
+            $(this).focus(function (event) {
+                if (this.value == inputVal) {
+                    this.value = "";
+                }
+            }).blur(function (event) {
+                if (this.value == "") {
+                    this.value = inputVal;
+                }
+            });
+        });
         $(function () {
             $('a#process_input').bind('click', function () {
                 $.post('/results', {
@@ -64,23 +76,19 @@
 <body>
 <div id="query_entry" align='center'>
     <form>
-        <textarea id="text_input" rows="10" cols="120" name=input_sql_query style="font-size: 14pt">Type SQL query here...
-        </textarea>
+        <textarea align="left" id="text_input" rows="10" cols="90" name=input_sql_query style="font-size: 14pt"
+                  placeholder="Type SQL query here..."></textarea>
         <br><br><br>
         <a href=# id=process_input>
-            <button style="font-size: 14pt">Execute SQL Query</button>
+            <button align="left" style="font-size: 14pt">Execute SQL Query</button>
         </a>
     </form>
     <br>
 </div>
-<div id="results_section" style=overflow:auto;">
+<div align="left" id="results_section" style=overflow:auto;">
     <h2 align='center'>SQL Query Results</h2>
     <p align='center' id=result>
-        {% for table in tables %}
-        {{ table|safe }}
-        {% endfor %}
     </p>
-
 </div>
 </body>
 </html>
