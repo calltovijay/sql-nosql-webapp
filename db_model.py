@@ -25,6 +25,6 @@ class DBConnection:
         df = None
         try:
             df = pd.read_sql_query(sql, self.con)
-        except:
-            status_message ="Error: Invalid SQL Query. Please validate"
+        except Exception as e:
+            status_message =str(e)
         return df, status_message
