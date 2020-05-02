@@ -9,6 +9,9 @@ app = Flask(__name__)
 def get_index_page():
     return render_template('index.html')
 
+@app.route('/sql_queries', methods=['GET'])
+def sample_sql_queries():
+    return render_template('nps_sql_queries.html')
 
 @app.route('/results', methods=['POST', 'GET'])
 def query_results():

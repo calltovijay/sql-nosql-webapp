@@ -6,11 +6,11 @@
             background-color: #4CAF50; /* Green */
             border: none;
             color: white;
-            padding: 15px 32px;
+            padding: 10px 20px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 16px;
+            font-size: 12px;
         }
 
         .form-row textarea {
@@ -47,6 +47,10 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
     <script type=text/javascript>
+        function openSQLQueries(){
+            var win = window.open('/sql_queries', 'NPS SQL queries', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=1000,height=1000,left=200,top=70');
+
+        }
         $(".formInput").each(function () {
             var inputVal = $(this).val();
             $(this).focus(function (event) {
@@ -76,17 +80,25 @@
 <body>
 <div id="query_entry" align='center'>
     <form>
+        <h3>SP20: SQL AND NOSQL: 12147 - US Parks Data Analysis <br> <a href="javascript:openSQLQueries()">NPS SQL Queries</a></h3>
+        <h4>
+        Project Team:
+        <ul style="list-style-type:none">
+        <li>Huzefa Igatpuriwala - higatpur@iu.edu</li>
+        <li>Saurabh Swaroop - sswaroop@iu.edu </li>
+        <li>Vijayakumar Perumalsamy - vperumal@iu.edu</li>
+        </ul>
+        </h4>
         <textarea align="left" id="text_input" rows="10" cols="90" name=input_sql_query style="font-size: 14pt"
                   placeholder="Type SQL query here..."></textarea>
-        <br><br><br>
+        <br><br>
         <a href=# id=process_input>
             <button align="left" style="font-size: 14pt">Execute SQL Query</button>
         </a>
     </form>
-    <br>
 </div>
 <div align="left" id="results_section" style=overflow:auto;">
-    <h2 align='center'>SQL Query Results</h2>
+    <h3 align='center'>SQL Query Results</h3>
     <p align='center' id=result>
     </p>
 </div>

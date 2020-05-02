@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NPS SQL Queries</title>
+</head>
+<body>
+<ol>
+  <li>Fetch the distinct park types from NPS data</li>
+        <pre>
+        SELECT DISTINCT
+            ParkType
+        FROM
+            park_locations;
+        </pre>
+  <li>Find the top 10 most visited National parks in 2018 by RV Campers</li>
+        <pre>
+        SELECT
+            loc.ParkName, SUM(v.RVCampers)
+        FROM
+            nps.park_visitors v
+                INNER JOIN
+            nps.park_locations loc ON v.UnitCode = loc.UnitCode
+        WHERE
+            v.year = 2018
+                AND loc.ParkType = 'National Park'
+        GROUP BY loc.ParkName
+        ORDER BY SUM(v.RVCampers) DESC
+        LIMIT 10;
+        </pre>
+  <li>Find the top 10 most visited National Historical Park in 2017 grouped at month level by park visitors</li>
+        <pre>
+        SELECT
+            loc.ParkName, v.month, SUM(v.RecreationVisits)
+        FROM
+            nps.park_visitors v
+                INNER JOIN
+            nps.park_locations loc ON v.UnitCode = loc.UnitCode
+        WHERE
+            v.year = 2017
+                AND loc.ParkType = 'National Historical Park'
+        GROUP BY loc.ParkName, v.month
+        ORDER BY SUM(v.RecreationVisits) DESC
+        LIMIT 10;
+        </pre>
+</ol>
+</body>
+</html>
